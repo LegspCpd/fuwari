@@ -1,8 +1,8 @@
 ---
 title: 还不会Edgeone和Cloudflare优选？
-published: 2026-04-19
+published: 2026-05-09
 tags: [CloudFlare, CloudFlare优选, CloudFlare优选教程, 教程, Edgeone优选]
-category: CloudFlare, Edgeone
+category: CloudFlare
 draft: false
 ---
 # 作者的优选域名
