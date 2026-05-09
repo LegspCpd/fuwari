@@ -1,5 +1,5 @@
 ---
-title: 使用华为云
+title: 使用华为云制作优选域名
 published: 2026-05-09
 tags: [CloudFlare, CloudFlare优选, CloudFlare优选教程, 教程, Edgeone优选]
 category: CloudFlare
@@ -31,7 +31,7 @@ Edgeone的原理是差不多的，但这里推荐用华为云国际来优选
 
 ---
 ## 优选过程
-打开[https://huaweicloud.com](华为云)
+打开[华为云](https://huaweicloud.com/)
 
 注册一个账号，并把一个域名托管到上面
 
