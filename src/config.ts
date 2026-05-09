@@ -58,8 +58,13 @@ export const profileConfig: ProfileConfig = {
 	bio: "Protect What You Love.",
 	links: [
 		{
+            name: "Bilibili",
+            icon: "streamline-ultimate:bilibili-logo-bold",   // 你选的图标
+            url: "https://space.bilibili.com/1614911881",       // ← 改成你的 Bilibili 主页链接
+        },
+		{
 			name: "Discord",
-			icon: "fa6-brands:twitter", // Visit https://icones.js.org/ for icon codes
+			icon: "fa6-brands:discord", // Visit https://icones.js.org/ for icon codes
 			// You will need to install the corresponding icon set if it's not already included
 			// `pnpm add @iconify-json/<icon-set-name>`
 			url: "https://discord.gg/legspcpd",

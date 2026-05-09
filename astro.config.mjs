@@ -48,13 +48,12 @@ export default defineConfig({
 			globalInstance: true,
 		}),
 		icon({
-			include: {
-				"preprocess: vitePreprocess(),": ["*"],
-				"fa6-brands": ["*"],
-				"fa6-regular": ["*"],
-				"fa6-solid": ["*"],
-			},
-		}),
+      // 允许从 Iconify CDN 动态加载图标
+      include: {
+        'streamline-ultimate': ['*'],   // 允许这个图标集
+        'fa6-brands': ['*'],            // 保留你已有的图标
+        }
+        }),
 		expressiveCode({
 			themes: [expressiveCodeConfig.theme, expressiveCodeConfig.theme],
 			plugins: [
