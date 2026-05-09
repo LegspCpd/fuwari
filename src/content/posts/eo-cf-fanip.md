@@ -1,5 +1,5 @@
 ---
-title: 还不会Edgeone和Cloudflare优选？
+title: 使用华为云
 published: 2026-05-09
 tags: [CloudFlare, CloudFlare优选, CloudFlare优选教程, 教程, Edgeone优选]
 category: CloudFlare
@@ -7,15 +7,15 @@ draft: false
 ---
 # 作者的优选域名
 Edgeone：[https://eo.legspcpd.furry.bz/](https://eo.legspcpd.furry.bz/)
-![[QQ20260509-110615.png]]
+![](https://imghub.legspcpd.indevs.in/file/image/QQ20260509-110615.png)
 Cloudflare: [https://cf.legspcpd.furry.bz/](https://cf.legspcpd.furry.bz/)
-![[QQ20260509-110717.png]]
+![](https://imghub.legspcpd.indevs.in/file/image/QQ20260509-110717.png)
 
 ---
 
 ## Cloudflare
 可以去看我之前做的教程
-[[cf-ys]]
+[https://blog.legspcpd.qzz.io/posts/cf-ys/](https://blog.legspcpd.qzz.io/posts/cf-ys/)
 
 ---
 ## Edgeone
@@ -31,13 +31,14 @@ Edgeone的原理是差不多的，但这里推荐用华为云国际来优选
 
 ---
 ## 优选过程
-打开华为云[https://huaweicloud.com](https://huaweicloud.com)
+打开[https://huaweicloud.com](华为云)
+
 注册一个账号，并把一个域名托管到上面
 
 解析完之后，找到 ==云解析服务 DNS==>==公网域名==>你托管的域名
 点 ==添加记录集== ，用A记录指向那四个IP
-![[QQ20260509-111220.png]]
+![](https://imghub.legspcpd.indevs.in/file/image/QQ20260509-111220.png)
 按照这样来填，填完后点确定
 这时候我们去测试
-![[QQ20260509-111546.png]]
+![](https://imghub.legspcpd.indevs.in/file/image/QQ20260509-111546.png)
 解析出来了
