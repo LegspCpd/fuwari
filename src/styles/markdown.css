@@ -20,21 +20,21 @@
     }
 
     a:not(.no-styling) {
-    @apply relative bg-none font-medium text-[var(--primary)]
-           underline decoration-[var(--link-underline)] decoration-1 decoration-dashed underline-offset-4
-           transition rounded-md p-1 -m-1 expand-animation;
+        @apply relative bg-none font-medium text-[var(--primary)]
+               underline decoration-[var(--link-underline)] decoration-1 decoration-dashed underline-offset-4
+               transition rounded-md p-1 -m-1 expand-animation;
 
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    display: inline-block;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+        display: inline-block;
 
-    &:hover, &:active {
-        @apply decoration-transparent;
-        background: var(--btn-plain-bg-hover);
-        border-bottom: 1px dashed var(--link-hover);
-        text-decoration: none;
+        &:hover, &:active {
+            @apply decoration-transparent;
+            background: var(--btn-plain-bg-hover);
+            border-bottom: 1px dashed var(--link-hover);
+            text-decoration: none;
+        }
     }
-}
 
     code {
         @apply bg-[var(--inline-code-bg)] text-[var(--inline-code-color)] px-1 py-0.5 rounded-md overflow-hidden;
@@ -92,7 +92,6 @@
         }
     }
 
-
     ul, ol {
         li::marker {
             @apply text-[var(--primary)];
@@ -111,7 +110,6 @@
         p:before, p:after {
             @apply content-none;
         }
-
     }
 
     .katex-display-container {
@@ -119,5 +117,4 @@
         overflow-x: auto;
         margin: 1em 0;
     }
-    
 }
