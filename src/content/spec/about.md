@@ -88,7 +88,8 @@
 如果您发现网站内容存在滥用、侵权或其他违法违规行为，请通过以下方式联系我们：
 
 - 邮箱：<info@legspcpd.indevs.in>
-  - Discord：<https://discord.gg/legspcpd>
+- Discord：<https://discord.gg/legspcpd>
+
 我们将认真对待每一个举报，并在收到举报后及时处理相关问题。
 
 ## 适用法律
