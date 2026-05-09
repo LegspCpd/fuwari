@@ -26,7 +26,7 @@ import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-cop
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://blog.legspcpd.qzz.io/", // Your site's URL here. Used for sitemap, RSS feed, etc.
+	site: "https://blog.legspcpd.dpdns.org/", // Your site's URL here. Used for sitemap, RSS feed, etc.
 	base: "/",
 	trailingSlash: "always",
 	integrations: [
