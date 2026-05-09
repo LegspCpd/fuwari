@@ -15,18 +15,26 @@ Cloudflare: [https://cf.legspcpd.furry.bz/](https://cf.legspcpd.furry.bz/)
 
 ## Cloudflare
 可以去看我之前做的教程
-[https://blog.legspcpd.qzz.io/posts/cf-ys/](https://blog.legspcpd.qzz.io/posts/cf-ys/)
+[Cloudflare优选教程](https://blog.legspcpd.qzz.io/posts/cf-ys/)
 
 ---
 ## Edgeone
 Edgeone的原理是差不多的，但这里推荐用华为云国际来优选
+
 推荐以下IP
-==43.174.150.*==
-==43.174.151.*==
+
+43.174.150.*
+
+43.174.151.*
+
 其实还有
+
 43.174.130.*
+
 43.174.131.*
+
 43.174.132.*
+
 这三个，但是基本上都会被ban
 
 ---
