@@ -10,14 +10,15 @@ media:
 # ==========================================
 content:
 
-  # ----------------------------------------
+# ----------------------------------------
   # A. 博客文章列表 -> src/content/posts
   # ----------------------------------------
   - name: posts
     label: 📝 博客文章
     type: collection
     path: src/content/posts
-    filename: "{fields.slug}.md" # 如果没有设置 slug，可用 "{title}.md"
+    extension: md # 👈 显式指定文件扩展名（必填）
+    filename: "{slug}" # 👈 动态自动生成文件名（不写 .md 扩展名）
     format: yaml-frontmatter
     view:
       fields: [title, published, draft, category]
