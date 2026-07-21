@@ -71,8 +71,10 @@ content:
     label: 📄 特殊/独立页面 (Spec)
     type: collection
     path: src/content/spec
-    filename: "{fields.slug}.md"
+    extension: md # 👈 显式指定 extension
+    filename: "{slug}" # 👈 filename 不要写后缀
     format: yaml-frontmatter
+    # ...后续字段不变
     view:
       fields: [title]
       primary: title
