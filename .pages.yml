@@ -1,28 +1,28 @@
 # ==========================================
-# 1. 媒体文件配置（默认图片与附件路径）
+# 1. 媒体文件全局配置
 # ==========================================
 media:
-  input: public/images     # 默认选择/上传图片时的保存路径
-  output: /images          # 渲染 Markdown 时引用的 URL 前缀
+  input: public/images
+  output: /images
 
 # ==========================================
-# 2. 内容模型配置
+# 2. 内容模型配置（对应你的项目目录）
 # ==========================================
 content:
 
   # ----------------------------------------
-  # 模块 A：博客文章列表 (Collection)
+  # A. 博客文章列表 -> src/content/posts
   # ----------------------------------------
   - name: posts
     label: 📝 博客文章
     type: collection
-    path: src/content/posts # 若实际路径是 src/content/blog 请修改此行
-    filename: "{fields.slug}.md"
+    path: src/content/posts
+    filename: "{fields.slug}.md" # 如果没有设置 slug，可用 "{title}.md"
     format: yaml-frontmatter
     view:
-      fields: [title, date, draft]
+      fields: [title, published, draft, category]
       primary: title
-      sort: [date]
+      sort: [published]
       order: desc
     fields:
       - name: title
@@ -30,39 +30,28 @@ content:
         type: string
         required: true
 
-      - name: slug
-        label: 文章 Slug (URL路径)
-        type: string
+      - name: published
+        label: 发布时间
+        type: date
         required: true
 
       - name: description
-        label: 文章简介/摘要
+        label: 文章摘要/简介
         type: text
 
-      - name: date
-        label: 发布日期
-        type: date
-        required: true
-
-      - name: updated
-        label: 更新日期
-        type: date
-
-      - name: cover
+      - name: image
         label: 封面图片
         type: image
 
-      - name: categories
-        label: 文章分类
+      - name: tags
+        label: 标签
         type: list
         field:
           type: string
 
-      - name: tags
-        label: 文章标签
-        type: list
-        field:
-          type: string
+      - name: category
+        label: 分类
+        type: string
 
       - name: draft
         label: 是否草稿
@@ -74,75 +63,59 @@ content:
         type: rich-text
 
   # ----------------------------------------
-  # 模块 B：独立页面（如 关于页面、友链等）
+  # B. 特殊页面 -> src/content/spec
+  # (如 about.md, friends.md 等)
   # ----------------------------------------
-  - name: pages
-    label: 📄 独立页面
+  - name: spec_pages
+    label: 📄 特殊/独立页面 (Spec)
     type: collection
-    path: src/content/pages # 如果你的独立页面保存在此处
+    path: src/content/spec
     filename: "{fields.slug}.md"
     format: yaml-frontmatter
     view:
-      fields: [title, slug]
+      fields: [title]
       primary: title
     fields:
       - name: title
         label: 页面标题
         type: string
         required: true
-      - name: slug
-        label: 页面 Slug (如 about)
-        type: string
-        required: true
+
+      - name: description
+        label: 页面描述
+        type: text
+
       - name: body
         label: 页面正文
         type: rich-text
 
   # ----------------------------------------
-  # 模块 C：Public 根目录静态文件管理
-  # (可在此上传 PDF、Zip 压缩包、 Favicon、字体文件等)
+  # C. Public 根目录文件管理
+  # (可以直接往 public/ 下传 PDF、Zip、图片等)
   # ----------------------------------------
   - name: public_files
     label: 📁 Public 静态文件上传
     type: collection
     path: public
-    exclude: ["images/**"]  # 排除默认图片目录，避免列表太乱
+    exclude: ["images/**", "favicon.*"] # 过滤已有目录和图标
     view:
       fields: [file]
       primary: file
     fields:
       - name: file
-        label: 上传静态文件 (PDF/Zip/图片/文档等)
+        label: 上传文件到 public 根目录
         type: file
 
   # ----------------------------------------
-  # 模块 D：站点全局配置/数据 (例如 site.json)
+  # D. 站点配置 -> src/config
+  # (支持管理 src/config 目录下的配置文件，如 site.config.ts/json)
   # ----------------------------------------
   - name: site_config
-    label: ⚙️ 站点全局设置
+    label: ⚙️ 站点配置文件
     type: file
-    path: src/data/site.json  # 替换为你项目实际的配置文件路径（如 config.json / site.json）
-    format: json
+    path: src/config/profileConfig.ts # 若该目录为 json 可改为 site.json；如果是 yaml 改为 site.yaml
+    format: raw
     fields:
-      - name: title
-        label: 博客名称
-        type: string
-      - name: description
-        label: 博客一句话介绍
-        type: text
-      - name: author
-        label: 作者名称
-        type: string
-      - name: avatar
-        label: 作者头像
-        type: image
-      - name: social
-        label: 社交链接
-        type: list
-        fields:
-          - name: name
-            label: 平台名称 (如 GitHub)
-            type: string
-          - name: url
-            label: 链接地址
-            type: string
+      - name: body
+        label: 配置文件源码/内容
+        type: code
