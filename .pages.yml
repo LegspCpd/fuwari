@@ -1,23 +1,23 @@
 # ==========================================
-# Pages CMS 配置文件 (.pages.yml)
+# 1. 媒体文件全局配置
 # ==========================================
-
-# 1. 媒体资源与全局上传设置
 media:
   input: public/images
   output: /images
 
-# 2. 内容与配置文件映射
+# ==========================================
+# 2. 内容模型配置（对应你的项目目录）
+# ==========================================
 content:
 
   # ----------------------------------------
-  # 模块 1：博客文章 (src/content/posts)
+  # A. 博客文章列表 -> src/content/posts
   # ----------------------------------------
   - name: posts
     label: 📝 博客文章
     type: collection
     path: src/content/posts
-    filename: "{fields.slug}.md"
+    filename: "{fields.slug}.md" # 如果没有设置 slug，可用 "{title}.md"
     format: yaml-frontmatter
     view:
       fields: [title, published, draft, category]
@@ -31,42 +31,43 @@ content:
         required: true
 
       - name: published
-        label: 发布日期
+        label: 发布时间
         type: date
         required: true
 
       - name: description
-        label: 文章摘要
+        label: 文章摘要/简介
         type: text
 
       - name: image
-        label: 封面图
+        label: 封面图片
         type: image
 
-      - name: category
-        label: 文章分类
-        type: string
-
       - name: tags
-        label: 标签列表
+        label: 标签
         type: list
         field:
           type: string
 
+      - name: category
+        label: 分类
+        type: string
+
       - name: draft
-        label: 设为草稿
+        label: 是否草稿
         type: boolean
         default: false
 
       - name: body
-        label: 文章正文
+        label: 正文内容
         type: rich-text
 
   # ----------------------------------------
-  # 模块 2：特殊/独立页面 (src/content/spec)
+  # B. 特殊页面 -> src/content/spec
+  # (如 about.md, friends.md 等)
   # ----------------------------------------
   - name: spec_pages
-    label: 📄 特殊页面 (About / 友链等)
+    label: 📄 特殊/独立页面 (Spec)
     type: collection
     path: src/content/spec
     filename: "{fields.slug}.md"
@@ -85,196 +86,36 @@ content:
         type: text
 
       - name: body
-        label: 页面内容
+        label: 页面正文
         type: rich-text
 
   # ----------------------------------------
-  # 模块 3：Public 静态资源目录与附件管理
+  # C. Public 根目录文件管理
+  # (可以直接往 public/ 下传 PDF、Zip、图片等)
   # ----------------------------------------
-  - name: public_root
-    label: 📁 Public 根目录文件 (PDF/Zip等)
+  - name: public_files
+    label: 📁 Public 静态文件上传
     type: collection
     path: public
-    exclude: ["images/**", "favicon.*"]
+    exclude: ["images/**", "favicon.*"] # 过滤已有目录和图标
     view:
       fields: [file]
       primary: file
     fields:
       - name: file
-        label: 上传文件至 public 根目录
+        label: 上传文件到 public 根目录
         type: file
 
-  - name: public_images
-    label: 🖼️ Public/images 图片库
-    type: collection
-    path: public/images
-    view:
-      fields: [file]
-      primary: file
-    fields:
-      - name: file
-        label: 上传图片
-        type: image
-
   # ----------------------------------------
-  # 模块 4：站点 TS 核心配置文件 (src/config/)
+  # D. 站点配置 -> src/config
+  # (支持管理 src/config 目录下的配置文件，如 site.config.ts/json)
   # ----------------------------------------
   - name: site_config
-    label: ⚙️ 1. 站点基础配置 (siteConfig.ts)
+    label: ⚙️ 站点配置文件
     type: file
-    path: src/config/siteConfig.ts
+    path: src/config/profileConfig.ts # 若该目录为 json 可改为 site.json；如果是 yaml 改为 site.yaml
     format: raw
     fields:
       - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: profile_config
-    label: 👤 2. 用户资料配置 (profileConfig.ts)
-    type: file
-    path: src/config/profileConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: navbar_config
-    label: 🧭 3. 导航栏配置 (navBarConfig.ts)
-    type: file
-    path: src/config/navBarConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: sidebar_config
-    label: 📐 4. 侧边栏配置 (sidebarConfig.ts)
-    type: file
-    path: src/config/sidebarConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: footer_config
-    label: 🦶 5. 页脚配置 (footerConfig.ts)
-    type: file
-    path: src/config/footerConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: announcement_config
-    label: 📢 6. 公告配置 (announcementConfig.ts)
-    type: file
-    path: src/config/announcementConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: comment_config
-    label: 💬 7. 评论系统配置 (commentConfig.ts)
-    type: file
-    path: src/config/commentConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: friends_config
-    label: 🤝 8. 友链配置 (friendsConfig.ts)
-    type: file
-    path: src/config/friendsConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: music_config
-    label: 🎵 9. 音乐播放器配置 (musicConfig.ts)
-    type: file
-    path: src/config/musicConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: gallery_config
-    label: 📸 10. 相册配置 (galleryConfig.ts)
-    type: file
-    path: src/config/galleryConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: sponsor_config
-    label: 🪙 11. 赞助配置 (sponsorConfig.ts)
-    type: file
-    path: src/config/sponsorConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: wallpaper_config
-    label: 🖼️ 12. 背景壁纸配置 (backgroundWallpaper.ts)
-    type: file
-    path: src/config/backgroundWallpaper.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: sakura_config
-    label: 🌸 13. 樱花特效配置 (sakuraConfig.ts)
-    type: file
-    path: src/config/sakuraConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: pio_config
-    label: 🐱 14. Pio 看板娘配置 (pioConfig.ts)
-    type: file
-    path: src/config/pioConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: ad_config
-    label: 📢 15. 广告配置 (adConfig.ts)
-    type: file
-    path: src/config/adConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
-        type: code
-
-  - name: license_config
-    label: 📜 16. 许可证配置 (licenseConfig.ts)
-    type: file
-    path: src/config/licenseConfig.ts
-    format: raw
-    fields:
-      - name: body
-        label: 代码编辑器
+        label: 配置文件源码/内容
         type: code
