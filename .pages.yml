@@ -1,0 +1,67 @@
+# 1. 媒体/图片文件上传配置
+media:
+  input: public/images     # 上传的图片保存到仓库 public/images 文件夹
+  output: /images          # 渲染 Markdown 时引用的相对图片路径
+
+# 2. 内容模型配置
+content:
+  # 文章列表配置
+  - name: posts
+    label: 博客文章
+    type: collection
+    path: src/content/posts # Astro 的文章默认存储路径 (如果是 src/content/blog 请自行修改)
+    filename: "{fields.slug}.md" # 或者 "{year}-{month}-{day}-{fields.slug}.md"
+    format: yaml-frontmatter
+    view:
+      fields: [title, date, draft]
+      primary: title
+      sort: [date]
+      order: desc
+    fields:
+      - name: title
+        label: 文章标题
+        type: string
+        required: true
+
+      - name: slug
+        label: 文章 Slug (URL路径)
+        type: string
+        required: true
+
+      - name: description
+        label: 文章简介/摘要
+        type: text
+
+      - name: date
+        label: 发布日期
+        type: date
+        required: true
+
+      - name: updated
+        label: 更新日期
+        type: date
+
+      - name: cover
+        label: 封面图片
+        type: image
+
+      - name: categories
+        label: 文章分类
+        type: list
+        field:
+          type: string
+
+      - name: tags
+        label: 文章标签
+        type: list
+        field:
+          type: string
+
+      - name: draft
+        label: 是否草稿
+        type: boolean
+        default: false
+
+      - name: body
+        label: 正文内容
+        type: rich-text
