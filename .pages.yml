@@ -1,16 +1,23 @@
-# 1. 媒体/图片文件上传配置
+# ==========================================
+# 1. 媒体文件配置（默认图片与附件路径）
+# ==========================================
 media:
-  input: public/images     # 上传的图片保存到仓库 public/images 文件夹
-  output: /images          # 渲染 Markdown 时引用的相对图片路径
+  input: public/images     # 默认选择/上传图片时的保存路径
+  output: /images          # 渲染 Markdown 时引用的 URL 前缀
 
+# ==========================================
 # 2. 内容模型配置
+# ==========================================
 content:
-  # 文章列表配置
+
+  # ----------------------------------------
+  # 模块 A：博客文章列表 (Collection)
+  # ----------------------------------------
   - name: posts
-    label: 博客文章
+    label: 📝 博客文章
     type: collection
-    path: src/content/posts # Astro 的文章默认存储路径 (如果是 src/content/blog 请自行修改)
-    filename: "{fields.slug}.md" # 或者 "{year}-{month}-{day}-{fields.slug}.md"
+    path: src/content/posts # 若实际路径是 src/content/blog 请修改此行
+    filename: "{fields.slug}.md"
     format: yaml-frontmatter
     view:
       fields: [title, date, draft]
@@ -65,3 +72,77 @@ content:
       - name: body
         label: 正文内容
         type: rich-text
+
+  # ----------------------------------------
+  # 模块 B：独立页面（如 关于页面、友链等）
+  # ----------------------------------------
+  - name: pages
+    label: 📄 独立页面
+    type: collection
+    path: src/content/pages # 如果你的独立页面保存在此处
+    filename: "{fields.slug}.md"
+    format: yaml-frontmatter
+    view:
+      fields: [title, slug]
+      primary: title
+    fields:
+      - name: title
+        label: 页面标题
+        type: string
+        required: true
+      - name: slug
+        label: 页面 Slug (如 about)
+        type: string
+        required: true
+      - name: body
+        label: 页面正文
+        type: rich-text
+
+  # ----------------------------------------
+  # 模块 C：Public 根目录静态文件管理
+  # (可在此上传 PDF、Zip 压缩包、 Favicon、字体文件等)
+  # ----------------------------------------
+  - name: public_files
+    label: 📁 Public 静态文件上传
+    type: collection
+    path: public
+    exclude: ["images/**"]  # 排除默认图片目录，避免列表太乱
+    view:
+      fields: [file]
+      primary: file
+    fields:
+      - name: file
+        label: 上传静态文件 (PDF/Zip/图片/文档等)
+        type: file
+
+  # ----------------------------------------
+  # 模块 D：站点全局配置/数据 (例如 site.json)
+  # ----------------------------------------
+  - name: site_config
+    label: ⚙️ 站点全局设置
+    type: file
+    path: src/data/site.json  # 替换为你项目实际的配置文件路径（如 config.json / site.json）
+    format: json
+    fields:
+      - name: title
+        label: 博客名称
+        type: string
+      - name: description
+        label: 博客一句话介绍
+        type: text
+      - name: author
+        label: 作者名称
+        type: string
+      - name: avatar
+        label: 作者头像
+        type: image
+      - name: social
+        label: 社交链接
+        type: list
+        fields:
+          - name: name
+            label: 平台名称 (如 GitHub)
+            type: string
+          - name: url
+            label: 链接地址
+            type: string
