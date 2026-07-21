@@ -1,30 +1,17 @@
-# ==========================================
-# 1. 媒体文件全局配置
-# ==========================================
 media:
   input: public/images
   output: /images
 
-# ==========================================
-# 2. 内容模型配置（对应你的项目目录）
-# ==========================================
 content:
-
-# ----------------------------------------
-  # A. 博客文章列表 -> src/content/posts
-  # ----------------------------------------
   - name: posts
-    label: 📝 博客文章
+    label: 博客文章
     type: collection
     path: src/content/posts
-    extension: md # 👈 显式指定文件扩展名（必填）
-    filename: "{slug}" # 👈 动态自动生成文件名（不写 .md 扩展名）
+    extension: md
     format: yaml-frontmatter
     view:
-      fields: [title, published, draft, category]
+      fields: [title, published, draft]
       primary: title
-      sort: [published]
-      order: desc
     fields:
       - name: title
         label: 文章标题
@@ -37,7 +24,7 @@ content:
         required: true
 
       - name: description
-        label: 文章摘要/简介
+        label: 文章摘要
         type: text
 
       - name: image
@@ -63,21 +50,12 @@ content:
         label: 正文内容
         type: rich-text
 
-  # ----------------------------------------
-  # B. 特殊页面 -> src/content/spec
-  # (如 about.md, friends.md 等)
-  # ----------------------------------------
   - name: spec_pages
-    label: 📄 特殊/独立页面 (Spec)
+    label: 特殊页面
     type: collection
     path: src/content/spec
-    extension: md # 👈 显式指定 extension
-    filename: "{slug}" # 👈 filename 不要写后缀
+    extension: md
     format: yaml-frontmatter
-    # ...后续字段不变
-    view:
-      fields: [title]
-      primary: title
     fields:
       - name: title
         label: 页面标题
@@ -92,33 +70,11 @@ content:
         label: 页面正文
         type: rich-text
 
-  # ----------------------------------------
-  # C. Public 根目录文件管理
-  # (可以直接往 public/ 下传 PDF、Zip、图片等)
-  # ----------------------------------------
   - name: public_files
-    label: 📁 Public 静态文件上传
+    label: 静态文件上传
     type: collection
     path: public
-    exclude: ["images/**", "favicon.*"] # 过滤已有目录和图标
-    view:
-      fields: [file]
-      primary: file
     fields:
       - name: file
-        label: 上传文件到 public 根目录
+        label: 选择上传文件
         type: file
-
-  # ----------------------------------------
-  # D. 站点配置 -> src/config
-  # (支持管理 src/config 目录下的配置文件，如 site.config.ts/json)
-  # ----------------------------------------
-  - name: site_config
-    label: ⚙️ 站点配置文件
-    type: file
-    path: src/config/profileConfig.ts # 若该目录为 json 可改为 site.json；如果是 yaml 改为 site.yaml
-    format: raw
-    fields:
-      - name: body
-        label: 配置文件源码/内容
-        type: code
